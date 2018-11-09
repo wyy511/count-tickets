@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>计算票价工具</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    ul {
+      width: 100%;
+      
+    }
+    li {
+      list-style: none;
+      display: inline-block;
+      text-align: center;
+    }
+    .container {
+      padding: 20px 0;
+      border: 1px solid #acacac;
+    }
+    .item {
+      width: 19%;
+      height: 30px;
+      margin-bottom: 10px;
+    }
+    .w15 {
+      width: 15%;
+    }
+
+    input, button {
+      border: 1px solid #000;
+      border-radius: 4px;
+      width: 100%;
+      text-align: center;
+    }
+    .disable {
+      border: none;
+    }
+
+    .input {
+      height: 100%;
+    }
+    .input:focus {
+      border: 2px solid rgb(0, 255, 0);
+    }
+    .btn {
+      width: 100%;
+      height: 30px;
+      border: 1px solid #000;
+      margin: 20px 0;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="container">
+        <ul class="raw">
+            <li class="item w15">票价</li>
+            <li class="item">起始单号</li>
+            <li class="item">结束单号</li>
+            <li class="item">票数</li>
+            <li class="item">金额</li>
+          </ul>
+      
+          <!-- 第一行 -->
+          <ul class="raw user-row">
+            <li class="item w15">
+              <input type="text" value="2" placeholder="票价一" id="price1" data-index="1" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" placeholder="起始单号" id="start1" data-index="1" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" placeholder="结束单号" id="end1" data-index="1" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" id="num1" class="disable" value="0" readonly="true">
+            </li>
+            <li class="item">
+              <input type="text" id="count1" class="disable" value="0" readonly="true">
+            </li>
+          </ul>
+      
+          <!-- 第二行 -->
+          <ul class="raw user-row">
+            <li class="item w15">
+              <input type="text" value="3" placeholder="票价二" data-index="2" id="price2" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" placeholder="起始单号" data-index="2" id="start2" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" placeholder="结束单号" data-index="2" id="end2" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" id="num2" class="disable" value="0" readonly="true">
+            </li>
+            <li class="item">
+                <input type="text" id="count2" class="disable" value="0" readonly="true">
+              </li>
+          </ul>
+      
+          <!-- 第三行 -->
+          <ul class="raw user-row">
+            <li class="item w15">
+              <input type="text" value="4" placeholder="票价三" data-index="3" id="price3" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" placeholder="起始单号" data-index="3" id="start3" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" placeholder="结束单号" data-index="3" id="end3" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" id="num3" class="disable" value="0" readonly="true">
+            </li>
+            <li class="item">
+                <input type="text" id="count3" class="disable" value="0" readonly="true">
+              </li>
+          </ul>
+
+          <!-- 第四行 -->
+          <ul class="raw user-row">
+              <li class="item w15">
+                <input type="text" value="5" placeholder="票价四" data-index="4" id="price4" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="起始单号" data-index="4" id="start4" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="结束单号" data-index="4" id="end4" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" id="num4" class="disable" value="0" readonly="true">
+              </li>
+              <li class="item">
+                  <input type="text" id="count4" class="disable" value="0" readonly="true">
+                </li>
+            </ul>
+
+          <!-- 第五行 -->
+          <ul class="raw user-row">
+              <li class="item w15">
+                <input type="text" value="6" placeholder="票价五" data-index="5" id="price5" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="起始单号" data-index="5" id="start5" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="结束单号" data-index="5" id="end5" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" id="num5" class="disable" value="0" readonly="true">
+              </li>
+              <li class="item">
+                  <input type="text" id="count5" class="disable" value="0" readonly="true">
+                </li>
+            </ul>
+
+          <!-- 第六行 -->
+          <ul class="raw user-row">
+              <li class="item w15">
+                <input type="text" value="7" placeholder="票价六" data-index="6" id="price6" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="起始单号" data-index="6" id="start6" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="结束单号" data-index="6" id="end6" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" id="num6" class="disable" value="0" readonly="true">
+              </li>
+              <li class="item">
+                  <input type="text" id="count6" class="disable" value="0" readonly="true">
+                </li>
+            </ul>
+            
+          <!-- 第七行 -->
+          <ul class="raw user-row">
+              <li class="item w15">
+                <input type="text" value="8" placeholder="票价七" data-index="7" id="price7" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="起始单号" data-index="7" id="start7" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="结束单号" data-index="7" id="end7" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" id="num7" class="disable" value="0" readonly="true">
+              </li>
+              <li class="item">
+                  <input type="text" id="count7" class="disable" value="0" readonly="true">
+                </li>
+            </ul>
+
+          <!-- 第八行 -->
+          <ul class="raw user-row">
+              <li class="item w15">
+                <input type="text" value="9" placeholder="票价八" data-index="8" id="price8" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="起始单号" data-index="8" id="start8" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="结束单号" data-index="8" id="end8" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" id="num8" class="disable" value="0" readonly="true">
+              </li>
+              <li class="item">
+                  <input type="text" id="count8" class="disable" value="0" readonly="true">
+                </li>
+            </ul>
+          
+          <!-- 第九行 -->
+          <ul class="raw user-row">
+              <li class="item w15">
+                <input type="text" value="10" placeholder="票价五" data-index="9" id="price9" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="起始单号" data-index="9" id="start9" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="结束单号" data-index="9" id="end9" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" id="num9" class="disable" value="0" readonly="true">
+              </li>
+              <li class="item">
+                  <input type="text" id="count9" class="disable" value="0" readonly="true">
+                </li>
+            </ul>
+          
+          <!-- 第十行 -->
+          <ul class="raw user-row">
+              <li class="item w15">
+                <input type="text" value="11" placeholder="票价十" data-index="10" id="price10" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="起始单号" data-index="10" id="start10" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="结束单号" data-index="10" id="end10" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" id="num10" class="disable" value="0" readonly="true">
+              </li>
+              <li class="item">
+                  <input type="text" id="count10" class="disable" value="0" readonly="true">
+                </li>
+            </ul>
+            <!-- 第十一行 -->
+            <ul class="raw user-row">
+              <li class="item w15">
+                <input type="text" value="12" placeholder="票价十一" data-index="11" id="price11" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="起始单号" data-index="11" id="start11" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" placeholder="结束单号" data-index="11" id="end11" class="input" onblur="checkBlur(event)">
+              </li>
+              <li class="item">
+                <input type="text" id="num11" class="disable" value="0" readonly="true">
+              </li>
+              <li class="item">
+                  <input type="text" id="count11" class="disable" value="0" readonly="true">
+                </li>
+            </ul>
+            <!-- 第十二行 -->
+          <ul class="raw user-row">
+            <li class="item w15">
+              <input type="text" value="13" placeholder="票价十二" data-index="12" id="price12" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" placeholder="起始单号" data-index="12" id="start12" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" placeholder="结束单号" data-index="12" id="end12" class="input" onblur="checkBlur(event)">
+            </li>
+            <li class="item">
+              <input type="text" id="num12" class="disable" value="0" readonly="true">
+            </li>
+            <li class="item">
+                <input type="text" id="count12" class="disable" value="0" readonly="true">
+              </li>
+          </ul>
+      
+          <!-- 确定 -->
+          <button class="btn" id="confirm">合计:<span id="sum">0</span>元</button>
+          <button class="btn" id="reset" onclick="reset()">清空</button>
+    </div>
+
+  </div>
+</body>
+<script type="text/javascript">
+  function getTicketNum (start, end) {
+    var des = end - start;
+    var result = 0;
+    // 如果des小于0则说明起始票和结束票不在同一段中
+    if (des < 0 && start !== 0 && end !== 0) {
+      result = Number(100 - start) + Number(end)
+    } else {
+      result = des;
+    }
+    return result;
+  }
+  function checkBlur (e) {
+    var val = e.target.value;
+    var id = e.target.dataset.index;
+    
+    var price = document.getElementById('price' + id).value || 0;
+    var start = document.getElementById('start' + id).value || 0;
+    var end = document.getElementById('end' + id).value || 0;
+    var countPrice = document.getElementById('count' + id);
+    var numPrice = document.getElementById('num' + id);
+    
+    if (isNaN(val)) {
+      e.target.value = '';
+      alert('请输入数字')
+    } else if (Number(val) / 100 >= 1) {
+      e.target.value = '';
+      alert('您输入的数字不能超过100')
+    } else {
+      numPrice.value = getTicketNum(start, end);
+      countPrice.value = price * numPrice.value;
+      
+      if (countPrice.classList.contains('error') && numPrice.classList.contains('error')) {
+        countPrice.classList.remove('error')
+        numPrice.classList.remove('error')
+      }
+      if (countPrice.value < 0) {
+        countPrice.classList.add('error')
+        numPrice.classList.add('error')
+      }
+      // 计算最后的总价
+      getSum();
+    }
+    return;
+  }
+  function getSum () {
+    var userRow = document.getElementsByClassName('user-row');
+    var sum = 0;
+    for(let i = 0, len = userRow.length; i < len; i++) {
+      sum += Number(document.getElementById('count' + (i + 1)).value);
+    }
+    document.getElementById('sum').innerHTML = sum;
+    return;
+  }
+  function reset () {
+    var inputEle = document.getElementsByTagName('input');
+    for(let i = 0, len = inputEle.length; i < len; i++) {
+      
+      if (/^count/.test(inputEle[i].id) || /^num/.test(inputEle[i].id)) {
+        inputEle[i].value = 0
+      } else {
+        inputEle[i].value = ''
+      }
+    }
+    document.getElementById('sum').innerHTML = 0;
+    return;
+  }
+</script>
+</html>
